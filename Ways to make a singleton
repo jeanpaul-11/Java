@@ -1,0 +1,65 @@
+/*
+         MANERAS DE CREAR EL PATRON DE DISEÑO SINGLETON EN JAVA
+         JEAN PAUL B)
+*/
+
+public class Singleton {
+    
+    private Singleton(){ }
+    
+    private static class SingletonSuport{
+        private static final Singleton INSTANCE = new Singleton();
+    }
+    
+    public Singleton getInstance(){
+        return SingletonSuport.INSTANCE;
+    }
+}
+
+// OTRA MANERA DE CREARLO 
+
+public final class Singleton {
+    private static volatile Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance(String value) {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+/* la diferencia de este al otro que esta abajo es que este codigo tiene en cuenta el tema de las variables 'volatile' y el modelo de memoria java, algo que el proximo codigo no lo tiene
+  //No se puede instanciar por ( Singleton s = new Singleton();)
+  //instanciamos por el metodo
+  Singleton = Singleton.getInstance();
+*/
+
+// OTRA MANERA DE CREARLO
+public class Singleton(){
+	// Declaracion
+	private static Singleton instancia;
+	
+	//Para evitar instancia mediante operador new	
+	private Singleton(){  }
+     
+	//Para obtener la instancia unicamente por este metodo
+	public static Singleton getInstance(){
+		if( instancia = null ){
+			instancia = new Singleton();
+		}
+		return instancia;
+	}
+}
+
+/* 
+  //No se puede instanciar por ( Singleton s = new Singleton();)
+  //instanciamos por el metodo
+  Singleton = Singleton.getInstance();
+*/
